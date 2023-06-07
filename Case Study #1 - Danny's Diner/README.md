@@ -5,7 +5,7 @@
 ```SQL
 SELECT 
   s.customer_id, 
-  sum(m.price) as total_amount 
+  SUM(m.price) AS total_amount 
 FROM 
   dannys_diner.sales s 
   JOIN dannys_diner.menu m ON s.product_id = m.product_id;
@@ -24,7 +24,7 @@ SELECT
   customer_id, 
   COUNT(
     DISTINCT(order_date)
-  ) as num_of_days 
+  ) AS num_of_days 
 FROM 
   dannys_diner.sales 
 GROUP BY 
@@ -42,7 +42,7 @@ Answer:
 ```SQL
 WITH CTE AS (
   SELECT 
-    ROW_NUMBER() OVER (PARTITION BY customer_id) as row_num, 
+    ROW_NUMBER() OVER (PARTITION BY customer_id) AS row_num, 
     customer_id, 
     order_date, 
     product_id 
@@ -65,7 +65,7 @@ Answer:
 | B           | curry        |
 | C           | ramen        |
 
-4. What is the most purchased item on the menu and how many times was it purchased by all customers?
+#### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 
 ```SQL
 SELECT 
@@ -78,7 +78,7 @@ GROUP BY
   s.product_id, 
   m.product_name 
 ORDER BY 
-  num_of_purchased desc 
+  num_of_purchased DESC
 LIMIT 
   1;
 ```
@@ -88,7 +88,7 @@ Answer:
 | ramen        | 8                |
 
 
-5. Which item was the most popular for each customer?
+#### 5. Which item was the most popular for each customer?
 
 ```SQL
 WITH CTE AS (
@@ -97,10 +97,10 @@ WITH CTE AS (
       PARTITION BY customer_id 
       ORDER BY 
         COUNT(product_id) desc
-    ) as row_num, 
+    ) AS row_num, 
     customer_id, 
     product_id, 
-    count(product_id) as num_of_purchased 
+    COUNT(product_id) AS num_of_purchased 
   FROM 
     dannys_diner.sales 
   GROUP BY 
@@ -129,12 +129,12 @@ Answer:
 | B           | ramen        | 2                |
 | C           | ramen        | 3                |
 
-6. Which item was purchased first by the customer after they became a member?
+#### 6. Which item was purchased first by the customer after they became a member?
 
 ```SQL
 WITH CTE AS (
   SELECT 
-    ROW_NUMBER() OVER (PARTITION BY s.customer_id) as row_num, 
+    ROW_NUMBER() OVER (PARTITION BY s.customer_id) AS row_num, 
     s.customer_id, 
     s.product_id 
   FROM 
@@ -160,7 +160,7 @@ Answer:
 | A           | ramen        |
 | B           | sushi        |
 
-7. Which item was purchased just before the customer became a member?
+#### 7. Which item was purchased just before the customer became a member?
 
 ```SQL
 WITH CTE AS (
@@ -168,7 +168,7 @@ WITH CTE AS (
     ROW_NUMBER() OVER (
       PARTITION BY s.customer_id 
       ORDER BY 
-        s.order_date desc
+        s.order_date DESC
     ) AS row_num, 
     s.customer_id, 
     s.product_id, 
@@ -197,12 +197,12 @@ Answer:
 | A           | sushi        |
 | B           | sushi        |
 
-8.What is the total items and amount spent for each member before they became a member?
+#### 8.What is the total items and amount spent for each member before they became a member?
 
 ```SQL
 SELECT 
   s.customer_id, 
-  COUNT(s.product_id) as num_of_items_purchased, 
+  COUNT(s.product_id) AS num_of_items_purchased, 
   SUM(m.price) as total_amount 
 FROM 
   dannys_diner.sales s 
@@ -221,7 +221,7 @@ Answer:
 | A           | 2                      | 25           |
 | B           | 3                      | 40           |
 
-9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
+#### 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 
 ```SQL
 SELECT 
@@ -244,7 +244,7 @@ Answer:
 | B           | 940   |
 | C           | 360   |
 
-10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
+#### 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
 
 ```SQL
 SELECT 
