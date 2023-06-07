@@ -1,5 +1,5 @@
 ## Case Study #1 - Danny's Diner
-
+![Danny's Diner](C:\Users\User.DESKTOP-P36QR03\Desktop\1.png)
 #### 1. What is the total amount each customer spent at the restaurant?
 
 ```SQL
