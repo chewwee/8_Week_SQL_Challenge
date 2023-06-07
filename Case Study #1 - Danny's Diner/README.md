@@ -1,6 +1,7 @@
 ## Case Study #1 - Danny's Diner
 
-1. What is the total amount each customer spent at the restaurant?
+#### 1. What is the total amount each customer spent at the restaurant?
+
 ```SQL
 SELECT 
   s.customer_id, 
@@ -9,14 +10,15 @@ FROM
   dannys_diner.sales s 
   JOIN dannys_diner.menu m ON s.product_id = m.product_id;
 ```
-
+Answer:
 | customer_id | total_amount |
 | ----------- | ------------ |
 | A           | 76           |
 | B           | 74           |
 | C           | 36           |
 
-2. How many days has each customer visited the restaurant?
+#### 2. How many days has each customer visited the restaurant?
+
 ```SQL
 SELECT 
   customer_id, 
@@ -28,14 +30,15 @@ FROM
 GROUP BY 
   customer_id;
 ```
-
+Answer:
 | customer_id | num_of_days |
 | ----------- | ----------- |
 | A           | 4           |
 | B           | 6           |
 | C           | 2           |
 
-3. What was the first item from the menu purchased by each customer?
+#### 3. What was the first item from the menu purchased by each customer?
+
 ```SQL
 WITH CTE AS (
   SELECT 
@@ -55,8 +58,7 @@ FROM
 WHERE 
   row_num = 1;
 ```
-
-
+Answer:
 | customer_id | product_name |
 | -----------  | ------------ |
 | A              | sushi        |
@@ -64,6 +66,7 @@ WHERE
 | C           | ramen        |
 
 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
+
 ```SQL
 SELECT 
   m.product_name, 
@@ -79,13 +82,14 @@ ORDER BY
 LIMIT 
   1;
 ```
-
+Answer:
 | product_name | num_of_purchased |
 | ------------ | ---------------- |
 | ramen        | 8                |
 
 
 5. Which item was the most popular for each customer?
+
 ```SQL
 WITH CTE AS (
   SELECT 
@@ -116,7 +120,7 @@ ORDER BY
   CTE.customer_id;
 ```
 
-
+Answer:
 | customer_id | product_name | num_of_purchased |
 | ----------- | ------------ | ---------------- |
 | A           | ramen        | 3                |
@@ -126,6 +130,7 @@ ORDER BY
 | C           | ramen        | 3                |
 
 6. Which item was purchased first by the customer after they became a member?
+
 ```SQL
 WITH CTE AS (
   SELECT 
@@ -149,13 +154,14 @@ WHERE
 ORDER BY 
   CTE.customer_id;
 ```
-
+Answer:
 | customer_id | product_name |
 | ----------- | ------------ |
 | A           | ramen        |
 | B           | sushi        |
 
 7. Which item was purchased just before the customer became a member?
+
 ```SQL
 WITH CTE AS (
   SELECT 
@@ -185,13 +191,14 @@ WHERE
 ORDER BY 
   CTE.customer_id;
 ```
-
+Answer:
 | customer_id | product_name |
 | ----------- | ------------ |
 | A           | sushi        |
 | B           | sushi        |
 
 8.What is the total items and amount spent for each member before they became a member?
+
 ```SQL
 SELECT 
   s.customer_id, 
@@ -208,13 +215,14 @@ GROUP BY
 ORDER BY 
   s.customer_id;
 ```
-
+Answer:
 | customer_id | num_of_items_purchased | total_amount |
 | ----------- | ---------------------- | ------------ |
 | A           | 2                      | 25           |
 | B           | 3                      | 40           |
 
 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
+
 ```SQL
 SELECT 
   s.customer_id, 
@@ -229,7 +237,7 @@ GROUP BY
 ORDER BY 
   customer_id;
 ```
-
+Answer:
 | customer_id | point |
 | ----------- | ----- |
 | A           | 860   |
@@ -237,6 +245,7 @@ ORDER BY
 | C           | 360   |
 
 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
+
 ```SQL
 SELECT 
   s.customer_id, 
@@ -259,7 +268,7 @@ GROUP BY
 ORDER BY 
   s.customer_id;
 ```
-
+Answer:
 | customer_id | points |
 | ----------- | ------ |
 | A           | 1370   |
