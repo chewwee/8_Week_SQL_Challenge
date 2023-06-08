@@ -1,3 +1,12 @@
+## Case Study #2 - Pizza Runner
+
+<img src="https://8weeksqlchallenge.com/images/case-study-designs/2.png" style="height:500px; width:500px;"/>
+
+## Entity Relationship Diagram
+
+
+## Data Cleaning 
+
 ```SQL
 CREATE TEMPORARY TABLE temp_cust_orders AS 
 SELECT 
