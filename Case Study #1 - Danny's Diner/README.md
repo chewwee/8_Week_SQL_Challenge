@@ -5,6 +5,12 @@
 ## Entity Relationship Diagram
 <img src="https://github.com/chewwee/8_Week_SQL_Challenge/blob/4ba47b5cf6d031ba411f412a501605bbed5ab97b/Case%20Study%20%231%20-%20Danny's%20Diner/Danny's%20Diner%20Entity%20Relationship%20Diagram.png" style="height: 300px; weight:300px;"/>
 
+## The SQL functions covered include
+1. Common Table Expressions
+2. Group by Aggregates
+3. Window Functions for Ranking and Index
+4. Table Joins
+
 ## Case Study Questions
 
 #### 1. What is the total amount each customer spent at the restaurant?
