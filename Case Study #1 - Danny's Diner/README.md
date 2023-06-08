@@ -2,6 +2,9 @@
 
 <img src="https://8weeksqlchallenge.com/images/case-study-designs/1.png" style="height: 500px; width:500px;"/>
 
+## Entity Relationship Diagram
+<img src="https://github.com/chewwee/8_Week_SQL_Challenge/blob/4ba47b5cf6d031ba411f412a501605bbed5ab97b/Case%20Study%20%231%20-%20Danny's%20Diner/Danny's%20Diner%20Entity%20Relationship%20Diagram.png" style="height: 300px; weight:300px;"/>
+
 #### 1. What is the total amount each customer spent at the restaurant?
 
 ```SQL
