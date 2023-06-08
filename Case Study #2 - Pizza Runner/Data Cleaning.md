@@ -3,7 +3,7 @@
 <img src="https://8weeksqlchallenge.com/images/case-study-designs/2.png" style="height:500px; width:500px;"/>
 
 ## Entity Relationship Diagram
-
+<img src="https://github.com/chewwee/8_Week_SQL_Challenge/blob/c3041c6af325f8ee592b099114e2cd77bf25931e/Case%20Study%20%232%20-%20Pizza%20Runner/pizza%20runner.png" style="height:400px;width:600px;"/>
 
 ## Data Cleaning 
 
