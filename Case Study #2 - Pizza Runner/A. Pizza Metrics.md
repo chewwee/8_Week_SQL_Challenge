@@ -1,40 +1,38 @@
 ## A. Pizza Metrics
 
-1. How many pizzas were ordered?
+## Case Study Questions
+
+#### 1. How many pizzas were ordered?
 ```SQL
 SELECT 
-  COUNT(*) 
+  COUNT(*) AS num_of_pizza_ordered
 FROM 
   pizza_runner.customer_orders;
 ```
 Answer:
-| count |
-| ----- |
-| 14    |
+| num_of_pizza_ordered |
+| -------------------- |
+| 14                   |
 
-2. How many unique customer orders were made?
+#### 2. How many unique customer orders were made?
 ```SQL
     SELECT 
       COUNT(
         DISTINCT(order_id)
-      ) 
+      ) AS unique_order
     FROM 
       pizza_runner.customer_orders;
 ```
 
-| count |
-| ----- |
-| 10    |
+| unique_order |
+| ------------ |
+| 10           |
 
----
-
-[View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
-
-3. How many successful orders were delivered by each runner?
+#### 3. How many successful orders were delivered by each runner?
 ```SQL
 SELECT 
   runner_id, 
-  COUNT(runner_id) 
+  COUNT(runner_id) as num_of_order
 FROM 
   pizza_runner.runner_orders 
 WHERE 
@@ -46,18 +44,18 @@ ORDER BY
 ```
 
 Answer:
-| runner_id | count |
-| --------- | ----- |
-| 1         | 4     |
-| 2         | 3     |
-| 3         | 1     |
+| runner_id | num_of_order |
+| --------- | ------------ |
+| 1         | 4            |
+| 2         | 3            |
+| 3         | 1            |
 
 
-4. How many of each type of pizza was delivered?
+#### 4. How many of each type of pizza was delivered?
 ```SQL
 SELECT 
   pn.pizza_name, 
-  COUNT(cust.pizza_id) 
+  COUNT(cust.pizza_id) as num_of_pizza_delivered
 FROM 
   pizza_runner.customer_orders cust 
   JOIN pizza_runner.runner_orders runner ON cust.order_id = runner.order_id 
@@ -68,13 +66,13 @@ GROUP BY
   pn.pizza_name;
 ```
 
-| pizza_name | count |
-| ---------- | ----- |
-| Meatlovers | 9     |
-| Vegetarian | 3     |
+| pizza_name | num_of_pizza_delivered |
+| ---------- | ---------------------- |
+| Meatlovers | 9                      |
+| Vegetarian | 3                      |
 
 
-5. How many Vegetarian and Meatlovers were ordered by each customer?
+#### 5. How many Vegetarian and Meatlovers were ordered by each customer?
 ```SQL
 WITH cte AS (
   SELECT 
@@ -137,7 +135,7 @@ Answer:
 
 
 
-6. What was the maximum number of pizzas delivered in a single order?
+#### 6. What was the maximum number of pizzas delivered in a single order?
 ```SQL
 SELECT 
   COUNT(cust.pizza_id) AS num_of_pizza 
@@ -158,7 +156,7 @@ LIMIT
 | ------------ |
 | 3            |
 
-7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
+#### 7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
 ```SQL
 WITH delivered_pizza AS (
   SELECT 
@@ -223,7 +221,7 @@ Answer:
 | 105         | 1       |            |
 
 
-8. How many pizzas were delivered that had both exclusions and extras？
+#### 8. How many pizzas were delivered that had both exclusions and extras？
 
 ```SQL
 WITH delivered_pizza AS (
@@ -249,18 +247,18 @@ CTE AS (
     customer_id
 ) 
 SELECT 
-  SUM(times) 
+  SUM(times) as num_of_pizza
 FROM 
   CTE;
 ```
 
-| sum |
-| --- |
-| 1   |
+| num_of_pizza |
+| ------------ |
+| 1            |
 
 
 
-9. What was the total volume of pizzas ordered for each hour of the day?
+#### 9. What was the total volume of pizzas ordered for each hour of the day?
 ```SQL
 SELECT 
   EXTRACT(
@@ -268,7 +266,7 @@ SELECT
     FROM 
       order_time
   ) as order_hour, 
-  count(*) 
+  count(*) as num_of_pizza
 FROM 
   pizza_runner.customer_orders 
 GROUP BY 
@@ -278,17 +276,17 @@ ORDER BY
 ```
 Answer:
 
-| order_hour | count |
-| ---------- | ----- |
-| 11         | 1     |
-| 13         | 3     |
-| 18         | 3     |
-| 19         | 1     |
-| 21         | 3     |
-| 23         | 3     |
+| order_hour | num_of_pizza |
+| ---------- | ------------ |
+| 11         | 1            |
+| 13         | 3            |
+| 18         | 3            |
+| 19         | 1            |
+| 21         | 3            |
+| 23         | 3            |
 
 
-10. What was the volume of orders for each day of the week?
+#### 10. What was the volume of orders for each day of the week?
 ```SQL
 SELECT 
   EXTRACT(
@@ -296,7 +294,7 @@ SELECT
     FROM 
       order_time
   ) as order_day, 
-  count(*) 
+  count(*) as num_of_order
 FROM 
   pizza_runner.customer_orders 
 GROUP BY 
@@ -305,9 +303,9 @@ ORDER BY
   order_day;
 ```
 Answer:
-| order_day | count |
-| --------- | ----- |
-| 3         | 5     |
-| 4         | 3     |
-| 5         | 1     |
-| 6         | 5     |
+| order_day | num_of_order |
+| --------- | ------------ |
+| 3         | 5            |
+| 4         | 3            |
+| 5         | 1            |
+| 6         | 5            |
