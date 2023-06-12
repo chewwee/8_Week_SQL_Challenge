@@ -2,6 +2,7 @@
 <img src="https://8weeksqlchallenge.com/images/case-study-designs/4.png" style="height:500px;width:500px" />
 
 ## Entity Relationship Diagram
+<img src="https://github.com/chewwee/8_Week_SQL_Challenge/blob/6094e64aa8d8c4c9a9045a65cc362752db18110d/Case%20Study%20%234%20-%20Data%20Bank/Data%20Bank.png" style="height:300px;width:500px"/>
 
 ## Case Study Questions
 ## A. Customer Nodes Exploration
