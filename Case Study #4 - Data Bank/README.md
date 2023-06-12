@@ -1,3 +1,9 @@
+## Case Study #4 Data Bank
+<img src="https://8weeksqlchallenge.com/images/case-study-designs/4.png" style="height:500px;width:500px" />
+
+## Entity Relationship Diagram
+
+## Case Study Questions
 ## A. Customer Nodes Exploration
 
 #### 1. How many unique nodes are there on the Data Bank system?
