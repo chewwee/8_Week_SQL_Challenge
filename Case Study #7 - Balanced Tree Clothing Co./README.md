@@ -1,6 +1,6 @@
 ## Case Study #7 - Balanced Tree Clothing Co. 
 
-<img src="https://8weeksqlchallenge.com/images/case-study-designs/7.png" style="height:500px, width:500px"/>
+<img src="https://8weeksqlchallenge.com/images/case-study-designs/7.png" style="height:500px; width:500px"/>
 
 ## Entity Relationship Diagram 
 
