@@ -3,18 +3,20 @@
 <img src="https://8weeksqlchallenge.com/images/case-study-designs/5.png" style="height:500px; width:500px"/>
 
 ## Entity Relationship Diagram
+<img src="https://8weeksqlchallenge.com/images/case-study-5-erd.png" style="height:500px;width:500px"/>
 
 ## Case Study Questions
 ## 1. Data Cleansing Steps
 
 In a single query, perform the following operations and generate a new table in the data_mart schema named clean_weekly_sales:
-
 1. Convert the week_date to a DATE format
 2. Add a week_number as the second column for each week_date value, for example any value from the 1st of January to 7th of January will be 1, 8th to 14th will be 2 etc
 3. Add a month_number with the calendar month for each week_date value as the 3rd column
 4. Add a calendar_year column as the 4th column containing either 2018, 2019 or 2020 values
-5. Add a new column called age_band after the original segment column using the following mapping on the number inside the segment value
-6. Add a new demographic column using the following mapping for the first letter in the segment values:
+5. Add a new column called age_band after the original segment column using the following mapping on the number inside the segment value <br>
+  ![image](https://github.com/chewwee/8_Week_SQL_Challenge/assets/90857289/7309b2b7-97e2-42a6-93dd-9dadcf33cfcc)
+6. Add a new demographic column using the following mapping for the first letter in the segment values: <br>
+  ![image](https://github.com/chewwee/8_Week_SQL_Challenge/assets/90857289/04cd494b-5b79-4f12-bba0-fae0cd957acd)
 7. Ensure all null string values with an "unknown" string value in the original segment column as well as the new age_band and demographic columns
 8. Generate a new avg_transaction column as the sales value divided by transactions rounded to 2 decimal places for each record
 
