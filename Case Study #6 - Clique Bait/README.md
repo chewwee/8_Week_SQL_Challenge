@@ -87,7 +87,33 @@ SELECT
 FROM 
   clique_bait.events;
 ```
+| percent_of_purchase |
+| ------------------- |
+| 49.86               |
+
+
 #### 6. What is the percentage of visits which view the checkout page but do not have a purchase event?
+```sql
+SELECT 
+  100 - ROUND(
+    (
+      SUM(
+        CASE WHEN e.event_type = '3' THEN 1 ELSE 0 END
+      )* 100 :: numeric / SUM(
+        CASE WHEN e.event_type = '1' 
+        AND ph.page_id = '12' THEN 1 ELSE 0 END
+      )
+    ), 
+    2
+  ) AS percentage_of_not_purchase 
+FROM 
+  clique_bait.events e 
+  JOIN clique_bait.event_identifier ei ON e.event_type = ei.event_type 
+  JOIN clique_bait.page_hierarchy ph ON e.page_id = ph.page_id
+```
+| percentage_of_not_purchase |
+| -------------------------- |
+| 15.50                      |
 
 #### 7. What are the top 3 pages by number of views?
 ```sql
