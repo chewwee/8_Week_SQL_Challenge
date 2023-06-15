@@ -126,13 +126,14 @@ SELECT
 FROM 
   clique_bait.events e 
   JOIN clique_bait.page_hierarchy ph ON e.page_id = ph.page_id 
-  JOIN clique_bait.event_identifier ei ON e.event_type = ei.event_type 
+  JOIN clique_bait.event_identifier ei ON e.event_type = ei.event_type
+WHERE 
+  ph.product_category IS NOT NULL
 GROUP BY 
-  ph.product_category；
+  ph.product_category
 ```
 | product_category | count_of_views | count_of_addcart |
 | ---------------- | -------------- | ---------------- |
-|                  | 7059           | 0                |
 | Luxury           | 3032           | 1870             |
 | Shellfish        | 6204           | 3792             |
 | Fish             | 4633           | 2789             |
