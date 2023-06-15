@@ -174,6 +174,89 @@ GROUP BY
 - How many times was each product purchased?
 Additionally, create another table which further aggregates the data for the above points but this time for each product category instead of individual products.
 
+```sql
+WITH view_cart as (
+  SELECT 
+    e.visit_id, 
+    ph.page_name, 
+    ph.product_category, 
+    SUM(
+      CASE WHEN e.event_type = '1' THEN 1 ELSE 0 END
+    ) AS page_view, 
+    SUM(
+      CASE WHEN e.event_type = '2' THEN 1 ELSE 0 END
+    ) AS add_to_cart 
+  FROM 
+    clique_bait.events e 
+    JOIN clique_bait.page_hierarchy ph ON e.page_id = ph.page_id 
+  WHERE 
+    ph.product_id IS NOT NULL 
+  GROUP BY 
+    e.visit_id, 
+    ph.page_name, 
+    ph.product_category 
+  ORDER BY 
+    e.visit_id
+), 
+purchase as (
+  SELECT 
+    distinct(visit_id) 
+  FROM 
+    clique_bait.events 
+  WHERE 
+    event_type = '3'
+), 
+view_cart_purchase as (
+  SELECT 
+    vc.visit_id, 
+    vc.page_name, 
+    vc.product_category, 
+    vc.page_view, 
+    vc.add_to_cart, 
+    CASE WHEN P.visit_id IS NOT NULL THEN 1 ELSE 0 END AS purchase 
+  FROM 
+    view_cart vc 
+    LEFT JOIN purchase p ON vc.visit_id = p.visit_id
+), 
+full_table as(
+  SELECT 
+    visit_id, 
+    page_name, 
+    product_category, 
+    page_view, 
+    add_to_cart, 
+    purchase, 
+    CASE WHEN add_to_cart = 1 
+    AND purchase = 0 THEN 1 ELSE 0 END AS abandoned 
+  FROM 
+    view_cart_purchase
+) 
+select 
+  page_name, 
+  product_category, 
+  sum(page_view) as view, 
+  sum(add_to_cart) as cart, 
+  sum(purchase) as purchase, 
+  sum(abandoned) as abandoned 
+from 
+  full_table 
+group by 
+  page_name, 
+  product_category;
+```
+| page_name      | product_category | view | cart | purchase | abandoned |
+| -------------- | ---------------- | ---- | ---- | -------- | --------- |
+| Salmon         | Fish             | 1559 | 938  | 1094     | 227       |
+| Oyster         | Shellfish        | 1568 | 943  | 1136     | 217       |
+| Tuna           | Fish             | 1515 | 931  | 1058     | 234       |
+| Russian Caviar | Luxury           | 1563 | 946  | 1088     | 249       |
+| Kingfish       | Fish             | 1559 | 920  | 1106     | 213       |
+| Black Truffle  | Luxury           | 1469 | 924  | 1045     | 217       |
+| Crab           | Shellfish        | 1564 | 949  | 1108     | 230       |
+| Lobster        | Shellfish        | 1547 | 968  | 1113     | 214       |
+| Abalone        | Shellfish        | 1525 | 932  | 1085     | 233       |
+
+
 Use your 2 new output tables - answer the following questions:
 
 #### 1. Which product had the most views, cart adds and purchases?
